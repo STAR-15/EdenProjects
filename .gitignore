@@ -1,1 +1,6 @@
-EdenProjects/.vs/EdenProjects/v15/Server/sqlite3/db.lock
+EdenProjects/.vs/
+EdenProjects/EdenProjects/packages/
+EdenProjects/EdenProjects/Eden.Admin/bin/
+EdenProjects/EdenProjects/Eden.Admin/obj/
+EdenProjects/EdenProjects/Eden.Server/bin/
+EdenProjects/EdenProjects/Eden.Server/obj/
