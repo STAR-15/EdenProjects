@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Eden.Server.EnumClass;
 
 namespace Eden.Server.DataModel
 {
@@ -13,5 +14,17 @@ namespace Eden.Server.DataModel
         public string UserName { get; set; }
 
         public string Password { get; set; }
+
+        public DateTime CreateTime { get; set; }
+
+        public DateTime UpdateTime { get; set; }
+
+        public string Phone { get; set; }
+
+        public string Email { get; set; }
+
+        public string Description { get; set; }
+
+        public RoleType Role { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Eden.Server.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -37,9 +38,6 @@ namespace Eden.Server.Repository
         public static IDbConnection NewConnection()
         {
             return new SQLiteConnection(sqlConnectionString.Value.ConnectionString);
-            //var dbconn = new SQLiteConnection(sqlConnectionString.Value.ConnectionString);
-            //dbconn.Open();
-            //return dbconn;
         }
 
         #region Setup DataBase
@@ -55,21 +53,30 @@ namespace Eden.Server.Repository
                         (
                             UserId INTEGER PRIMARY KEY autoincrement,
                             UserName TEXT NOT NULL,
-                            Password TEXT NOT NULL
-                        );");
-                //                conn.TryExecute(@"
-                //                    INSERT INTO User
-                //                    (
-                //                        UserName,
-                //                        Password,
-                //                    )VALUES
-                //                    (
-                //                        'Eden',
-                //                        'jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI='      
-                //                    );");
+                            Password TEXT NOT NULL,
+                            CreateTime TEXT NOT NULL,
+                            UpdateTime TEXT NOT NULL,
+                            Phone TEXT NOT NULL,
+                            Email TEXT NOT NULL,
+                            Description TEXT NOT NULL,
+                            Role TEXT NOT NULL
+                        );                   
+                    insert into User values 
+                    (NULL,
+                    'Eden',
+                    'jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=',
+                    datetime('now'),
+                    datetime('now'),
+                    '123456789',
+                    '123@456.com',
+                    'SuperAdmin',
+                    1);
+                    ");
             }
 
-            if (File.Exists(dbFileName)) return true;
+            if (File.Exists(dbFileName)) {
+                return true;
+            } 
             else return false;
         }
         private static void TryExecute(this IDbConnection conn, string sql)

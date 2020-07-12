@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModel\UserTO.cs" />
+    <Compile Include="EnumClass.cs" />
     <Compile Include="Repository\DbManager.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="TextHelper.cs" />

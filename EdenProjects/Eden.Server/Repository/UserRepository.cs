@@ -24,5 +24,67 @@ namespace Eden.Server.Repository
             var result = DbManager.NewConnection().Query<UserTO>(sql, new { UserName = userName }).FirstOrDefault();
             return result;
         }
+
+        public bool AddUser(UserTO user)
+        {
+            var sql = @"insert into User values 
+           (NULL,@UserName,@Password,@CreateTime,@UpdateTime,@Phone,@Email,@Description,@Role)";
+            var result = DbManager.NewConnection().Execute(sql, new
+            {
+                UserName = user.UserName,
+                Password = user.Password,
+                CreateTime = DateTime.Now,
+                UpdateTime = DateTime.Now,
+                Phone = user.Phone,
+                Email = user.Email,
+                Description = user.Description,
+                Role = (int)user.Role
+            });
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateUser(UserTO user)
+        {
+            var sql = @"update User 
+            set Password = @Password,
+            Phone = @Phone,
+            Email = @Email,
+            Description = @Description
+            where UserId = @UserId
+            ";
+            var result = DbManager.NewConnection().Execute(sql,
+                new
+                {
+                    Password = user.Password,
+                    Phone = user.Phone,
+                    Email = user.Email,
+                    Description = user.Description,
+                    UserId = user.UserId
+                });
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool DeleteUser(int userId)
+        {
+            var sql = @"delete from User where UserId=@UserId";
+            var result = DbManager.NewConnection().Execute(sql,
+                new
+                {
+                    UserId = userId
+                });
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
