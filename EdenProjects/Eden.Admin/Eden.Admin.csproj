@@ -95,6 +95,7 @@
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\sb-admin-2.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\adminlist.js" />
     <Content Include="Scripts\sb-admin-2.min.js" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.min.js" />
@@ -1757,6 +1758,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filter\AuthenticationFilter.cs" />
@@ -1770,7 +1772,9 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="Content\css\index.less" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.js.map" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
     <Content Include="vendor\bootstrap\js\bootstrap.js.map" />
@@ -1925,6 +1929,8 @@
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Views\Admin\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
