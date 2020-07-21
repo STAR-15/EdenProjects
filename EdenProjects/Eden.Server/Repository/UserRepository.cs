@@ -86,5 +86,16 @@ namespace Eden.Server.Repository
             }
             return false;
         }
+
+        public List<UserTO> GetUserList(string key)
+        {
+            var sql = @"select * from User ";
+            if (!string.IsNullOrEmpty(key))
+            {
+                sql += "where UserName = @UserName";
+            }
+            var result = DbManager.NewConnection().Query<UserTO>(sql, new { UserName = key });
+            return result.ToList();
+        }
     }
 }

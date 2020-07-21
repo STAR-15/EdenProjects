@@ -26,5 +26,21 @@ namespace Eden.Server.DataModel
         public string Description { get; set; }
 
         public RoleType Role { get; set; }
+
+        public DateTime CreateTimeLocal
+        {
+            get
+            {
+                return this.CreateTime.ToLocalTime();
+            }
+        }
+
+        public DateTime UpdateTimeLocal
+        {
+            get
+            {
+                return this.UpdateTime.ToLocalTime();
+            }
+        }
     }
 }
