@@ -27,19 +27,19 @@ namespace Eden.Server.DataModel
 
         public RoleType Role { get; set; }
 
-        public DateTime CreateTimeLocal
+        public string CreateTimeLocal
         {
             get
             {
-                return this.CreateTime.ToLocalTime();
+                return this.CreateTime.ToString("yyyy-MM-dd HH:mm:ss");
             }
         }
 
-        public DateTime UpdateTimeLocal
+        public string UpdateTimeLocal
         {
             get
             {
-                return this.UpdateTime.ToLocalTime();
+                return this.CreateTime.ToString("yyyy-MM-dd HH:mm:ss");
             }
         }
     }

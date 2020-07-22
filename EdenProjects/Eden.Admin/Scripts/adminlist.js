@@ -1,98 +1,49 @@
-﻿//$(function () {
-//    $('#dataTable').DataTable();
-//})
-
-var app = new Vue({
+﻿var app = new Vue({
     el: '#adminlist',
-    data() {
-        return {
+    data: function() {
+        return{
             tableData: {
                 loading: true,
                 columnsList: [
                     {
-                        title: 'Offer ID',
+                        title: 'UserId',
                         width: 70,
-                        key: 'offerId'
+                        key: 'UserId'
                     },
                     {
-                        title: 'Promo Code',
+                        title: 'UserName',
+                        width: 70,
+                        key: 'UserName'
+                    },
+                    {
+                        title: 'CreateTime',
+                        width: 70,
+                        key: 'CreateTime'
+                    },
+                    {
+                        title: 'UpdateTime',
+                        width: 70,
+                        key: 'UpdateTime'
+                    },
+                    {
+                        title: 'Phone',
+                        width: 70,
+                        key: 'Phone'
+                    },
+                    {
+                        title: 'Email',
+                        width: 70,
+                        key: 'Email'
+                    },
+                    {
+                        title: 'Description',
                         width: 200,
-                        render: (h, params) => {
-                            return h('div', params.row.offerCodes ? params.row.offerCodes.map(function (item) {
-                                return h('div', item.offerCode)
-                            }) : "");
-                        }
+                        key: 'Description'
                     },
                     {
-                        title: 'Offer Type',
-                        width: 120,
-                        key: 'offerType'
-                    },
-                    {
-                        title: 'Discount Type',
+                        title: 'Role',
                         width: 100,
-                        render: (h, params) => {
-                            return h('div', {}, this.enum_discountType[params.row.discountType]);
-                        }
-                    },
-                    {
-                        title: 'Campaign Period',
-                        width: 200,
-                        render: (h, params) => {
-                            return h('div', {}, params.row.startTime + " to " + params.row.endTime);
-                        }
-                    },
-                    {
-                        title: 'Quota Type',
-                        width: 100,
-                        render: (h, params) => {
-                            return h('div', {}, this.enum_quotaType[params.row.quotaType]);
-                        }
-                    },
-                    {
-                        title: 'Budget / Quota',
-                        width: 150,
-                        key: 'budgetOrQuota'
-                    },
-                    {
-                        title: 'Total spending',
-                        width: 200,
-                        key: 'totalSpending'
-                    },
-                    {
-                        title: 'Quota Spent',
-                        width: 100,
-                        key: 'quotaSpent'
-                    },
-                    {
-                        title: 'Alert Email',
-                        width: 200,
-                        render: (h, params) => {
-                            return h('div', params.row.contactEmails ? params.row.contactEmails.map(function (item) {
-                                return h('div', item)
-                            }) : "");
-                        }
-                    },
-                    {
-                        title: 'Discount %',
-                        width: 120,
-                        render: (h, params) => {
-                            return h('div', params.row.discountType == 1 ? params.row.discountValue + "%" : "");
-                        }
-                    },
-                    {
-                        title: 'DiscountAmount',
-                        width: 200,
-                        render: (h, params) => {
-                            return h('div', params.row.discountType == 2 ? params.row.currency + params.row.discountValue : "");
-                        }
-                    },
-                    {
-                        title: 'Status',
-                        width: 100,
-                        render: (h, params) => {
-                            return h('div', {}, this.enum_offerGroupName[params.row.offerGroupName]);
-                        }
+                        key: 'Role'
                     },
                     {
                         title: 'Action',
@@ -122,202 +73,39 @@ var app = new Vue({
                 data: [],
                 count: 0,
             },
-            poiColumns: [
-                {
-                    title: "Poi Id",
-                    key: "poiId"
-                },
-                {
-                    title: "Poi Name",
-                    key: "poiName"
-                },
-                {
-                    title: "Poi Address",
-                    key: "poiAddress"
-                },
-                {
-                    title: "Action",
-                    align: "center",
-                    fixed: "right",
-                    render: (h, params) => {
-                        return h("div", [
-                            h(
-                                "Button",
-                                {
-                                    props: {
-                                        type: "primary",
-                                        size: "small"
-                                    },
-                                    style: {
-                                        margin: "5px"
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.deletePoi(params.index);
-                                        }
-                                    }
-                                },
-                                "Delete"
-                            )
-                        ]);
-                    }
-                }
-            ],
             detailModel: {
-                mode: 'create offer',
+                mode: 'create admin',
                 isEnable: true,
-                offer: {
-                    offerId: '',
-                    status: 3,
-                    offerType: 14,
-                    regionId: 0,
-                    titleLang1: '',
-                    titleLang2: '',
-                    titleLang3: '',
-                    //offerPhotoUrl: '',
-                    currency: 'HKD',
-                    discountType: 1,
-                    discountValue: '',
-                    offerDistributeChannels: [1, 2, 3, 4, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
-                    startTime: '',
-                    endTime: '',
-                    availableStartTime: '',
-                    availableEndTime: '',
-                    offerCodes: [{
-                        offerCode: '',
-                        startTime: '',
-                        endTime: '',
-                        quota: '',
-                        status: 5
-                    }],
-                    ruleData: {
-                        minSpendingAmount: '',
-                        maxDeductAmount: '',
-                        quotaType: 2,
-                        quota: '',
-                        budgetAmount: "",
-                        contactEmails: [],
-                    },
-                    contentData: {
-                        description1: '',
-                        description2: '',
-                        description3: ''
-                    },
-                    isAllPoi: 1,
-                    sponsorType: 1,
-                    offerAction: 3,
-                    poiIds: [],
-                    accumulativeSpending: '',
-                    quotaUsed: '',
-                    alertEmail: [{ email: '' }],
+                user: {
+                    UserId: '',
+                    UserName: '',
+                    Password: '',
+                    Phone: 0,
+                    Email: '',
+                    Description: '',
+                    Role: '',
                 }
             },
-            offerDemo: {
-                offerId: '',
-                status: 3,
-                offerType: 14,
-                regionId: 0,
-                titleLang1: '',
-                titleLang2: '',
-                titleLang3: '',
-                //offerPhotoUrl: '',
-                currency: 'HKD',
-                discountType: 1,
-                discountValue: '',
-                offerDistributeChannels: [1, 2, 3, 4, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
-                startTime: '',
-                endTime: '',
-                availableStartTime: '',
-                availableEndTime: '',
-                offerCodes: [{
-                    offerCode: '',
-                    startTime: '',
-                    endTime: '',
-                    quota: '',
-                    status: 5
-                }],
-                ruleData: {
-                    minSpendingAmount: '',
-                    maxDeductAmount: '',
-                    quotaType: 2,
-                    quota: '',
-                    budgetAmount: "",
-                    contactEmails: [],
-                },
-                contentData: {
-                    description1: '',
-                    description2: '',
-                    description3: ''
-                },
-                isAllPoi: 1,
-                sponsorType: 1,
-                offerAction: 3,
-                poiIds: [],
-                accumulativeSpending: '',
-                quotaUsed: '',
-                alertEmail: [{ email: '' }],
+            enum_role: {
+                1: "SuperAdmin",
+                2: "Admin",
+                3: "Staff"
             },
-            detailShow: false,
-            saveButtonDisable: false,
-            filter: {
-                offerId: '',
-                offerCode: '',
-                offerTitle: '',
-                offerStatus: [],
-                availableStartTimeFrom: '',
-                availableStartTimeFromEnd: '',
-                availableEndTimeTo: '',
-                availableEndTimeToEnd: ''
-            },
-            regionList: [
-                {
-                    value: 0,
-                    label: '香港'
-                }
-            ],
-            discountTypeList: [
+            roleType: [
                 {
                     value: 1,
-                    label: 'Percent'
+                    label: 'SuperAdmin'
                 },
                 {
                     value: 2,
-                    label: 'Amount'
-                }
-            ],
-            sponsorTypeList: [
-                {
-                    value: 1,
-                    label: 'Platform'
-                },
-                {
-                    value: 2,
-                    label: 'Merchant'
+                    label: 'Admin'
                 },
                 {
                     value: 3,
-                    label: 'Thirdpart'
+                    label: 'Staff'
                 }
             ],
-            promoCodeStatusList: [
-                {
-                    value: 5,
-                    label: 'Pending'
-                },
-                {
-                    value: 10,
-                    label: 'Active'
-                },
-                {
-                    value: 0,
-                    label: 'InActive'
-                }
-            ],
-            enum_sponsorType: {
-                1: "Platform",
-                2: "Merchant",
-                3: "Thirdpart"
-            },
+            detailShow: false,
             paging: {
                 next: '',
                 previous: '',
@@ -325,32 +113,26 @@ var app = new Vue({
                 rows: 10,
                 count: 0,
             },
-            poiPaging: {
-                next: "",
-                previous: "",
-                currentPage: 1,
-                rows: 5,
-                count: 0
-            },
             isNew: false,
-            isDraft: false,
-            isEditable: false,
-            channelsDisplay: false,
-            channelDisplayList: [],
-            isChannelCheckAll: true,
-
         }
     },
     methods: {
         getList: function (page) {
+            const that = this;
             axios({
                 method: 'get',
-                url: '/Admin/GetTest'
+                url: '/Admin/GetList'
             }).then(function (resp) {
                 console.log(resp.data);
+                that.tableData.data = resp.data;
             }).catch(err => {
                 console.log('请求失败:' + err.status + ',' + err.statusText);
             });
+        },
+        openDetail: function (id) {
+            const that = this;
+            that.detailModel.user = id;
+            $("#adminDetail").modal("show");
         }
     },
     computed: {
@@ -363,7 +145,6 @@ var app = new Vue({
     },
     mounted: function () {
         console.log("strat");
-        $('#dataTable').DataTable();
         this.getList(1);
     }
 })

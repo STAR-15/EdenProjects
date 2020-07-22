@@ -21,7 +21,7 @@ namespace Eden.Admin.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetTest()
+        public JsonResult GetList()
         {
             var users = _userRepository.GetUserList("Eden");
             return Json(users,JsonRequestBehavior.AllowGet);
