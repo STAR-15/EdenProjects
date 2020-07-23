@@ -10,8 +10,15 @@
     <div>
         @*<h1 class="h3 mb-2 text-gray-800">Admin List</h1>*@
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Admin List</h6>
+            <div class="card-header py-3" style="display: flex;justify-content:space-between;align-items:center">
+                <h6 class="m-0 font-weight-bold text-primary" style="display: inline-flex;">Admin List</h6>
+                <div style="display: inline-flex;">
+                    <input type="text" class="form-control" placeholder="Search" v-model="keyword">
+                    <button class="btn btn-primary" v-on:click="getList">Search</button>
+                </div>
+                <div style="display: inline-flex;">
+                    <button class="btn btn-info" v-on:click="openDetail(0)">Create</button>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -45,7 +52,7 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">新增管理员</h5>
+                    <h5 class="modal-title" v-model="detailModel.mode"></h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -104,7 +111,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-success">Submit</a>
+                    <button class="btn btn-success" v-on:click="saveUser">Submit</button>
                 </div>
             </div>
         </div>
@@ -117,8 +124,8 @@
     @*<script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
         <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
         <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>*@
+    <script src="~/Scripts/alert.js"></script>
     <script src="~/Scripts/adminlist.js"></script>
-
 }
 
 

@@ -12,5 +12,18 @@ namespace Eden.Server
             byte[] _cipherText = _sha256.ComputeHash(Encoding.Default.GetBytes(plainText));
             return Convert.ToBase64String(_cipherText);
         }
+
+
+        public static string ReplaceEscapeCharacterForDBLikeSearch(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return value;
+
+            return string.Format("%{0}%", value.Trim().Replace(@"\", @"\\").Replace(@"[", @"\[")
+                                                        .Replace(@"]", @"\]")
+                                                        .Replace(@"_", @"\_")
+                                                        .Replace(@"%", @"\%")
+                                                         );
+        }
     }
 }

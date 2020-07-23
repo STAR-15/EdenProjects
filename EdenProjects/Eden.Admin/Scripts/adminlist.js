@@ -80,7 +80,7 @@
                     UserId: '',
                     UserName: '',
                     Password: '',
-                    Phone: 0,
+                    Phone: '',
                     Email: '',
                     Description: '',
                     Role: '',
@@ -105,7 +105,7 @@
                     label: 'Staff'
                 }
             ],
-            detailShow: false,
+            keyword: '',
             paging: {
                 next: '',
                 previous: '',
@@ -121,18 +121,42 @@
             const that = this;
             axios({
                 method: 'get',
-                url: '/Admin/GetList'
+                url: '/Admin/GetList' + '?key=' + that.keyword
             }).then(function (resp) {
                 console.log(resp.data);
                 that.tableData.data = resp.data;
+                MW.MsgUtil.msg('成功');
             }).catch(err => {
                 console.log('请求失败:' + err.status + ',' + err.statusText);
             });
         },
         openDetail: function (id) {
             const that = this;
-            that.detailModel.user = id;
+            if (id == 0) {
+                that.detailModel.mode = 'create admin',
+                that.detailModel.user = {
+                    UserId: '',
+                    UserName: '',
+                    Password: '',
+                    Phone: '',
+                    Email: '',
+                    Description: '',
+                    Role: 1,
+                }
+            } else {
+                that.detailModel.mode = 'edit admin',
+                that.detailModel.user = id;
+            }
             $("#adminDetail").modal("show");
+        },
+        saveUser: function () {
+            const that = this;
+            var param = that.detailModel.user;
+            axios.post('/Admin/AddUser', param).then(function (resp) {
+                console.log(resp.data);
+            }).catch(err => {
+                console.log('请求失败:' + err.status + ',' + err.statusText);
+            });
         }
     },
     computed: {

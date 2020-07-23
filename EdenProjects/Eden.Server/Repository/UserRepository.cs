@@ -92,9 +92,12 @@ namespace Eden.Server.Repository
             var sql = @"select * from User ";
             if (!string.IsNullOrEmpty(key))
             {
-                sql += "where UserName = @UserName";
+                sql += "where UserName like @Key " +
+                    "or Phone like @Key " +
+                    "or Email like @Key " +
+                    "or Description like @Key";
             }
-            var result = DbManager.NewConnection().Query<UserTO>(sql, new { UserName = key });
+            var result = DbManager.NewConnection().Query<UserTO>(sql, new { Key = TextHelper.ReplaceEscapeCharacterForDBLikeSearch(key) });
             return result.ToList();
         }
     }

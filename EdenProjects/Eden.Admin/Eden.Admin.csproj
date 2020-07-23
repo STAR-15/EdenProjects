@@ -92,11 +92,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\common.css" />
+    <None Include="Content\css\common.less" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\sb-admin-2.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\adminlist.js" />
+    <Content Include="Scripts\alert.js" />
     <Content Include="Scripts\sb-admin-2.min.js" />
     <Content Include="Scripts\vue.min.js" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.js" />

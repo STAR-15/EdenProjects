@@ -21,10 +21,21 @@ namespace Eden.Admin.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetList()
+        public JsonResult GetList(string key)
         {
-            var users = _userRepository.GetUserList("Eden");
+            var users = _userRepository.GetUserList(key);
             return Json(users,JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public bool AddUser(UserTO user)
+        {
+            var result = _userRepository.AddUser(user);
+            if (result)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
