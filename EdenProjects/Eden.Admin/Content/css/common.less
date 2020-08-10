@@ -10,84 +10,143 @@
     display: inline-block;
 }
 
-
 .layer {
     padding: 0 15px;
     position: fixed;
     opacity: 1;
     min-width: 260px;
-    &.alert-msg
 
-{
-    min-width: 100px;
-    background-color: #000;
-    filter: alpha(opacity=60);
-    background-color: rgba(0,0,0,0.6);
-    color: #fff;
-    border: none;
+    &.alert-msg {
+        min-width: 100px;
+        background-color: #000;
+        filter: alpha(opacity=60);
+        background-color: rgba(0,0,0,0.6);
+        color: #fff;
+        border: none;
+    }
+
+    .modal-dialog {
+        right: auto;
+        left: auto;
+        width: auto;
+    }
+
+    .layer-body {
+        position: relative;
+        padding: 20px;
+    }
+
+    .layer-footer {
+        padding: 15px 0;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+
+        &:before, &:after {
+            display: table;
+            content: " ";
+        }
+
+        &:after {
+            clear: both;
+        }
+
+        .btn {
+            border-radius: 2px;
+
+            & + .btn {
+                margin-left: 5px;
+            }
+        }
+    }
 }
 
-.modal-dialog {
-    right: auto;
-    left: auto;
-    width: auto;
-}
-
-.layer-body {
-    position: relative;
-    padding: 20px;
-}
-
-.layer {
-    padding: 0 15px;
+.menu_box {
     position: fixed;
-    opacity: 1;
-    min-width: 260px;
-    &.alert-msg
-
-{
-    min-width: 100px;
-    background-color: #000;
-    filter: alpha(opacity=60);
-    background-color: rgba(0,0,0,0.6);
-    color: #fff;
-    border: none;
-}
-
-.modal-dialog {
-    right: auto;
-    left: auto;
+    height: auto;
     width: auto;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    overflow: hidden;
+    opacity: .4;
+    transition: opacity .2s;
+    -webkit-transition: opacity .2s;
+    -moz-transition: opacity .2s;
+    -o-transition: opacity .2s;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    .menu_items {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+
+        li {
+            position: relative;
+            min-width: 70px;
+            height: 43px;
+            font-size: 14px;
+            display: block;
+            text-align: center;
+            overflow: hidden;
+            cursor: pointer;
+            background-color: rgb(112,112,112);
+            border-bottom: 1px #e5e5e5 solid;
+            border-radius: 5px;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+            -webkit-animation-name: layer-bounceIn;
+            animation-name: layer-bounceIn;
+            -webkit-animation-duration: .2s;
+            animation-duration: .2s;
+
+            span {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                padding: 12px 10px;
+                display: block;
+                color: #FFF;
+                line-height: 1;
+                font-size: 18px;
+                transition: top .2s;
+                -webkit-transition: top .2s;
+                -moz-transition: top .2s;
+                -o-transition: top .2s;
+            }
+
+            &.hideMenu {
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+                -webkit-animation-name: layer-bounceOut;
+                animation-name: layer-bounceOut;
+                -webkit-animation-duration: .2s;
+                animation-duration: .2s;
+            }
+
+            &:hover > span:first-child {
+                top: -60px;
+            }
+
+            &:hover > span + span {
+                top: 0;
+            }
+
+            span:first-child {
+                top: 0;
+            }
+
+            span + span {
+                top: 60px;
+                background-color: #3276b1;
+            }
+        }
+    }
 }
 
-.layer-body {
-    position: relative;
-    padding: 20px;
-}
 
-.layer-footer {
-    padding: 15px 0;
-    text-align: right;
-    border-top: 1px solid #e5e5e5;
-    &:before, &:after
-
-{
-    display: table;
-    content: " ";
-}
-
-&:after {
-    clear: both;
-}
-
-.btn {
-    border-radius: 2px;
-    & + .btn
-
-{
-    margin-left: 5px;
-}
-
-}
-}
-}

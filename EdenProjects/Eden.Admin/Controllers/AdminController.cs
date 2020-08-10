@@ -1,4 +1,5 @@
-﻿using Eden.Server.DataModel;
+﻿using Eden.Server;
+using Eden.Server.DataModel;
 using Eden.Server.Repository;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -30,6 +31,7 @@ namespace Eden.Admin.Controllers
         [HttpPost]
         public bool AddUser(UserTO user)
         {
+            user.Password = TextHelper.Sha256(user.Password);
             var result = _userRepository.AddUser(user);
             if (result)
             {
